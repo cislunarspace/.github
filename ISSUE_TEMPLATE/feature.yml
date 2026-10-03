@@ -1,0 +1,65 @@
+name: 功能与实验建议
+description: 提出新功能、实验方案或改进建议
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 提交前须知
+
+        - 先搜索现有 Issue，避免重复。
+        - **AI 生成的 issue**：标题最前面加 `[AI Generated]` 标记（位于类型标签之前），并在正文首行注明所用工具。未正确标记的不予受理。
+        - 标题以领域标签开头，后接一句说清对象与目的的中文短句。领域标签按内容取：`[data]`、`[experiment]`、`[infra]`、`[port]`、`[paper]`、`[研究型]`。优先级、状态等元信息不进标题。
+
+        示例标题：`[experiment] E2c 传播误差随弧长变化的 MC 化验证`
+        - 正文按 [CONTRIBUTING.md](../../CONTRIBUTING.md) 的正文写作约定写：各栏用连贯段落作答，细节不收折叠区。
+  - type: textarea
+    id: motivation
+    attributes:
+      label: 动机与问题
+      description: 现状是什么、为什么不够用；要解决的具体问题或要回答的科学问题。
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 提议方案
+      description: 打算怎么做：涉及的模块、方法、数据与产出。可附备选方案与取舍。
+    validations:
+      required: true
+  - type: textarea
+    id: prior-ideas
+    attributes:
+      label: 已有的想法或排查
+      description: 相关讨论、备选方案或已排除的路径；没有可留空。
+    validations:
+      required: false
+  - type: checkboxes
+    id: acceptance
+    attributes:
+      label: 验收标准
+      description: 完成后如何判定；逐条勾选式列出，可自行增删。
+      options:
+        - label: 明确的产出物（代码 / 数据 / 图 / 文档章节）已列出
+        - label: 每条标准可用命令或可观察结果判定，不含主观描述
+        - label: 涉及数值结果的，给出了判定阈值或对比基准
+        - label: 涉及实验的，给出了运行命令与数据存放路径
+  - type: dropdown
+    id: scope
+    attributes:
+      label: 影响范围
+      description: 建议主要落在哪个部分；跨多个时选最主要的一个并在方案中说明。
+      options:
+        - Rust workspace（dynamics / math-tools / experiments 内 Rust crate）
+        - experiments/visualization（Python）
+        - docs（文档）
+        - infra（CI、脚本、仓库配置）
+    validations:
+      required: true
+  - type: input
+    id: related-issue
+    attributes:
+      label: 关联 Issue
+      description: 如有关联的既有 Issue 编号请填写（如 #42）；没有则留空。
+      placeholder: "#42"
+    validations:
+      required: false

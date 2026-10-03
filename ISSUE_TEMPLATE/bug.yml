@@ -1,0 +1,89 @@
+name: 缺陷报告
+description: 报告仓库中的缺陷、异常行为或与文档不符的现象
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 提交前须知
+
+        - 先搜索现有 Issue，避免重复。
+        - **AI 生成的 issue**：标题最前面加 `[AI Generated]` 标记（位于类型标签之前），并在正文首行注明所用工具。未正确标记的不予受理。
+        - 标题以领域标签开头，后接一句说清对象与目的的中文短句。领域标签按内容取：`[data]`、`[experiment]`、`[infra]`、`[port]`、`[paper]`、`[研究型]`。优先级、状态等元信息不进标题。
+
+        示例标题：`[infra] ci.yml clippy 步骤在无系统依赖时误报`
+        - 正文按 [CONTRIBUTING.md](../../CONTRIBUTING.md) 的正文写作约定写：各栏用连贯段落作答，细节不收折叠区。
+  - type: textarea
+    id: summary
+    attributes:
+      label: 问题摘要
+      description: 一两句话说明什么环节、出现了什么异常现象。
+      placeholder: 例如：experiments/runner/rust 批量运行时，坐标转换结果在特定日期出现整列 NaN。
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 从干净状态开始的操作序列，或最小可复现的命令与输入。
+      placeholder: |
+        1. 进入 …… 目录
+        2. 运行 …… 命令
+        3. 观察 ……
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望行为
+      description: 按文档或约定应当发生什么；满足什么条件算修复。
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+      description: 实际发生了什么；如有报错，贴出完整错误信息。
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: 影响范围
+      description: 现象出现在哪个部分；跨多个时选最主要的一个并在问题描述中说明。
+      options:
+        - Rust workspace（dynamics / math-tools / experiments 内 Rust crate）
+        - experiments/visualization（Python）
+        - docs（文档）
+        - infra（CI、脚本、仓库配置）
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 环境
+      description: 操作系统、工具链版本；与问题无关的项可省略。
+      placeholder: |
+        OS：如 Ubuntu 24.04 / Windows 11
+        rustc -V：如 rustc 1.80.0
+        uv --version：如 uv 0.5.0
+    validations:
+      required: false
+  - type: textarea
+    id: investigation
+    attributes:
+      label: 已有排查
+      description: 试过什么、排除了什么；没有可留空。
+    validations:
+      required: false
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 验证命令与输出摘录
+      description: 已运行过的检查命令与关键输出（错误信息、失败测试名、异常数据位置等）；仅贴与问题直接相关的部分。
+      placeholder: |
+        $ cargo test --workspace
+        ……
+        $ uv run pytest -q
+        ……
+    validations:
+      required: false
